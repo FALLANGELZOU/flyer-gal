@@ -1,32 +1,62 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from "react";
 import "./sass/Dialog.sass"
 import { useState } from "react";
-import TypeIt from "typeit-react";
 
-export function Dialog(propos) {
-    const [name, setname] = useState(propos.name)
-    const [message, setMessage] = useState(propos.message)
-    const [typeitInstance, setTypeitInstance] = useState(null)
+function sleep (time: number) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
+interface textOption {
+    name: String
+    message: String
+    speed: number
+    block?: (e?: any) => void  // when show all text
+}
+
+var msgStatus = 0
+var showAll = false
+
+export function Dialog(propos: {option: textOption}) {
+    const name = propos.option.name
+    const message = propos.option.message
+    const speed = propos.option.speed
     const [showText, setShowText] = useState("")
-    var index = 0
-    const show = ()=>{
-        while(showText.length < message.length) {
-            setShowText(showText + message[index])
-            index ++
+  
+    const click = async ()=>{
+
+        if (msgStatus == 0) {
+            msgStatus = 1
+            new Promise(async (resolve, reject) => {
+                var index = 0
+                console.log(index);
+                
+                while(index <= message.length) {
+                    if (showAll) {
+                        await setShowText(message as any)
+                        break
+                    }
+                    await setShowText(showText + message.substring(0, index))
+                    index ++
+                    await sleep(speed)
+                }
+                resolve("finish")
+            })
+            .then(res => {
+                showAll = true    
+                propos.option.block?.apply(null)
+            }).catch(e => {
+                console.log(e);
+                
+            })
+        } else {
+            showAll = true
         }
-    }
-    const click = ()=>{
-        console.log(111);
-        
-            
         }
 
     return (
         <div id="dialog_layout" className="" onClick={click}> 
             <div id="dialog_text_layout">
                 <div id="name">{name}</div>
-                <hr ></hr>
+                <hr className="divider"></hr>
                 <div className="line">
                     <div id="message">
                         {showText}
