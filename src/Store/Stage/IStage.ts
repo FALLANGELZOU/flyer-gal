@@ -1,3 +1,5 @@
+import { PixiManager } from "@/Core/Pixi/PixiManager";
+
 export interface IStage {
     bgName: string; // 背景文件地址（相对或绝对）
     figNameMid: string; // 立绘_中 文件地址（相对或绝对）
@@ -9,4 +11,5 @@ export interface IStage {
     bgm: string; // 背景音乐 文件地址（相对或绝对）
     miniAvatar: string; // 小头像 文件地址（相对或绝对）
     isDisableDialog: boolean;  //  是否不显示Dialog
+    currentPixiManager: PixiManager | null
 }

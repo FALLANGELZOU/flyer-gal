@@ -11,7 +11,8 @@ const init: IStage = {
     vocal: "",
     bgm: "",
     miniAvatar: "",
-    isDisableDialog: false
+    isDisableDialog: false,
+    currentPixiManager: null
 }
 const StageSlice = createSlice({
     name: "stage",
@@ -19,9 +20,12 @@ const StageSlice = createSlice({
     reducers: {
         setbackground: (state, action) => {
             state.bgName = action.payload.bgName
+        },
+        setPixiManager: (state, action) => {
+            state.currentPixiManager = action.payload.pixiManager
         }
     }
 })
 
 export default StageSlice.reducer
-export const { setbackground } = StageSlice.actions
+export const { setbackground, setPixiManager } = StageSlice.actions

@@ -1,7 +1,7 @@
 export class FObject {
     private name: String
-    private parent: FObject
-    private children: Array<FObject>
+    private parent: FObject | null = null
+    private children: Array<FObject> = new Array()
     private isRoot: boolean
 
     constructor(name: String, isRoot: boolean = true) {
@@ -15,7 +15,7 @@ export class FObject {
      */
     targer(event: any) {
         if (!this.isRoot)
-            this.parent.receiver(event)
+            this.parent?.receiver(event)
     }
 
     /**

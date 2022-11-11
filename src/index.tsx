@@ -3,24 +3,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Dialog } from './Components/Dialog';
-
+import { FStore } from './Store/FStore';
+import { Provider } from 'react-redux';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const onBlock = () => {
-  console.log("finish");
-  
-}
 root.render(
   // <React.StrictMode>
-    <Dialog option={{
-      name: "Alice",
-      message: "我们每天度过的称之为日常的生活，其实是一个个奇迹的连续也说不定。 ———《日常》",
-      speed: 50,
-      block: onBlock
-    }}></Dialog>
+  <Provider store={ FStore }>
+    <App/>
+</Provider>
   // </React.StrictMode>
 );
 

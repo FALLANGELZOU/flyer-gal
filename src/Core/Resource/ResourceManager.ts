@@ -1,5 +1,5 @@
 export class ResourceManager {
-    private mManager: ResourceManager
+    private mManager: ResourceManager | null = null
     private constructor() {
 
     }

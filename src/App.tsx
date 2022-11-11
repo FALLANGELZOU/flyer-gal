@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import { FState, FStore } from './Store/FStore';
+import { setPixiManager } from './Store/Stage/StageSlice';
+import { PixiManager } from './Core/Pixi/PixiManager';
+import { GAME_PLAY } from './Core/Runtime/GamePlay';
+import { Perform } from './Components/Perform';
+import { logger } from './log/logger';
 
 function App() {
+  useInit()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <Perform></Perform>
+      </div>
   );
+}
+
+function useInit() {
+  logger.info("init")
+  //GAME_PLAY.pixiManager = new PixiManager()
 }
 
 export default App;
