@@ -26,9 +26,7 @@ export function Dialog(propos: {option: textOption}) {
         if (msgStatus == 0) {
             msgStatus = 1
             new Promise(async (resolve, reject) => {
-                var index = 0
-                console.log(index);
-                
+                var index = 0     
                 while(index <= message.length) {
                     if (showAll) {
                         await setShowText(message as any)
@@ -53,7 +51,7 @@ export function Dialog(propos: {option: textOption}) {
         }
 
     return (
-        <div id="dialog_layout" className="" onClick={click}> 
+        <div id="dialog_layout" onClick={click}> 
             <div id="dialog_text_layout">
                 <div id="name">{name}</div>
                 <hr className="divider"></hr>

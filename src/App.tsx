@@ -6,7 +6,9 @@ import { PixiManager } from './Core/Pixi/PixiManager';
 import { GAME_PLAY } from './Core/Runtime/GamePlay';
 import { Perform } from './Components/Perform';
 import { logger } from './log/logger';
-
+import axios from "axios"
+import { Command } from './Core/Parser/Symbols/Command';
+import { analyerScript } from './Core/Parser/Analyzer';
 function App() {
   useInit()
   return (
@@ -16,9 +18,23 @@ function App() {
   );
 }
 
-function useInit() {
-  logger.info("init")
-  //GAME_PLAY.pixiManager = new PixiManager()
+async function useInit() {
+  logger.info("全局初始化")
+  logger.setDebug()
+  // 资源链接
+
+
+
+  //  测试资源
+  axios.get(require("@/test/script.fg")).then(res => {
+    const commands = analyerScript(res.data)
+    console.log(commands);
+  }, err => {
+    console.log(err);
+    
+  })
+
+  
 }
 
 export default App;
